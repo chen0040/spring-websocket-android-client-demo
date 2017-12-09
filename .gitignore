@@ -7,6 +7,23 @@
 # BlueJ files
 *.ctxt
 
+spring-boot-application/*.iml
+spring-boot-application/.idea/
+spring-boot-application/target/
+spring-boot-application/out/
+
+*.iml
+.idea/
+
+bin/*.jar
+
+target/
+
+csharp-client-proj/csharp-client-proj/bin
+csharp-client-proj/csharp-client-proj/obj
+csharp-client-proj/csharp-client-proj.csproj.user
+csharp-client-proj/packages
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
