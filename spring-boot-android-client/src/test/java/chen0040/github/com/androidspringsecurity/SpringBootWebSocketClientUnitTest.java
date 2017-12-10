@@ -4,6 +4,9 @@ package chen0040.github.com.androidspringsecurity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.chen0040.sbclient.SpringBootWebSocketClient;
+import com.github.chen0040.sbclient.StompMessage;
+import com.github.chen0040.sbclient.StompMessageListener;
+import com.github.chen0040.sbclient.TopicHandler;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +26,14 @@ public class SpringBootWebSocketClientUnitTest extends AndroidLogContext {
    @Test
    public void testWebSocket() throws InterruptedException {
       SpringBootWebSocketClient client = new SpringBootWebSocketClient();
-      client.connect("ws://localhost:8080/my-ws");
+      TopicHandler handler = client.subscribe("/topics/event");
+      handler.addListener(new StompMessageListener() {
+         @Override
+         public void onMessage(StompMessage message) {
+            System.out.println(message.getHeader("destination") + ": " + message.getContent());
+         }
+      });
+      client.connect("ws://localhost:8080/my-ws/websocket");
       Thread.sleep(60000L);
       client.disconnect();
    }
