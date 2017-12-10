@@ -1,0 +1,65 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'idea'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile "org.java-websocket:Java-WebSocket:1.3.0"
+    testCompile 'junit:junit:4.12'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.1.53.android'
+    testCompile "org.robolectric:robolectric:3.3.2"
+
+    compile group: 'org.slf4j', name: 'slf4j-android', version: '1.7.7'
+}
+
+
+
+buildscript {
+    repositories {
+        jcenter()
+        //mavenCentral()
+        maven {
+            url "http://repo.maven.apache.org/maven2"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.9.0"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
