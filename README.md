@@ -19,4 +19,20 @@ The spring-boot-application defines an end point at http://localhost:8080/my-ws 
 
 ### Android WebSocket Client
 
+The spring-boot-android-client project contains the implementation of the android websocket client. To subscribe to the "/topics/event" at http://localhost:8080/my-ws, run the following android codes:
 
+```java
+
+SpringBootWebSocketClient client = new SpringBootWebSocketClient();
+client.setId("sub-001");
+TopicHandler handler = client.subscribe("/topics/event");
+handler.addListener(new StompMessageListener() {
+ @Override
+ public void onMessage(StompMessage message) {
+    System.out.println(message.getHeader("destination") + ": " + message.getContent());
+ }
+});
+client.connect("ws://localhost:8080/my-ws/websocket");
+Thread.sleep(60000L);
+client.disconnect();
+```
